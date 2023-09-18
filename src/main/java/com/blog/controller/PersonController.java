@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,6 +34,15 @@ public class PersonController {
 		}
 		Person p =personService.addPerson(person);
 		return new ResponseEntity<>(p,HttpStatus.OK);
+		
+	}
+	
+	@PutMapping("/updatePerson")
+	public ResponseEntity<Integer> updatePerson(@RequestBody Person person){
+		if(person.getId()==null || person.getName()==null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>(personService.updatePerson(person.getId(),person.getName()),HttpStatus.OK);
 		
 	}
 

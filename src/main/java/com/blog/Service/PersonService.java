@@ -19,7 +19,11 @@ public class PersonService {
 	}
 	
 	public Person addPerson(Person person) {
-		return personRepository.addPerson(person);
+		return personRepository.addPersonWithPreparedStatement(person);
+	}
+	
+	public int updatePerson(int id, String name) {
+		return personRepository.updatePerson(id, name);
 	}
 
 }
